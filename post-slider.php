@@ -27,11 +27,14 @@ add_action('wp_enqueue_scripts', 'add_style_script');
 function posts_slider($atts=null){
     $wp_atts = shortcode_atts([
         'cat' => -1,
+        'type'=> 'post'
     ], $atts);
+
+    $cat = explode(',',$wp_atts['cat']);
     $args = array(
-        'post_type'   => 'post',
+        'post_type'   => $wp_atts['type'],
         'post_status' => 'publish',
-        'cat'=> $wp_atts['cat'],
+        'cat'=> $cat,
         'posts_per_page'=>10
     );
 
